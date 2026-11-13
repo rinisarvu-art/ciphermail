@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherMail — Cyber Command Deck</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="app-container">
+
+        <!-- 1. Futuristic Floating Navigation Header (Top Deck) -->
+        <header class="top-deck">
+            <div class="deck-brand">
+                <div class="deck-brand-icon">⚡</div>
+                <h1>CipherMail</h1>
+                <span id="vault-status-indicator" class="vault-status-pill">STANDARD WORKSPACE</span>
+            </div>
+
+            <!-- Center Floating Covert Search Bar -->
+            <div class="deck-center">
+                <div class="deck-search">
+                    <span class="deck-search-icon">🔍</span>
+                    <input type="text" id="global-search" class="deck-search-input" placeholder="Search secure stream... (Hint: Try typing ':vault:open')">
+                </div>
+            </div>
+
+            <!-- Right Controls: Audio, Audit, Panic & User Pill -->
+            <div class="deck-controls">
+                <button id="sound-toggle-btn" class="ctrl-btn" title="Toggle Synthesized Audio FX">
+                    <span>🔊</span> Audio: ON
+                </button>
+
+                <button id="audit-btn" class="ctrl-btn" title="Inspect Zero-Knowledge Database">
+                    <span>🛡️</span> Examiner Audit
+                </button>
+
+                <button id="panic-btn" class="panic-ctrl-btn" title="Emergency Lock (ESC)">
+                    <span>🚨</span> PANIC LOCK (ESC)
+                </button>
+
+                <!-- User Profile Pill -->
+                <div class="user-pill">
+                    <div class="user-avatar" id="user-avatar-initial">C</div>
+                    <div class="user-meta">
+                        <span id="user-name-display" class="user-meta-name">Loading...</span>
+                        <span id="user-email-display" class="user-meta-email">...</span>
+                    </div>
+                    <button id="logout-btn" class="user-logout-btn" title="Logout & Purge Keys">🚪</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 2. Main Workspace Deck (Floating Cyber Island) -->
+        <main class="workspace-wrapper">
+
+            <!-- Left Panel: Action Nav + Email Stream -->
+            <section class="stream-panel">
+                <div class="stream-header">
+                    <div class="stream-top-row">
+                        <!-- Navigation Tabs (Inbox vs Sent) -->
+                        <div class="stream-tabs">
+                            <button id="nav-inbox" class="stream-tab-btn active">📥 Inbox</button>
+                            <button id="nav-sent" class="stream-tab-btn">📤 Sent & Seals</button>
+                        </div>
+
+                        <!-- Compose CTA -->
+                        <button id="compose-open-btn" class="compose-cta-btn">
+                            <span>✏️</span> Compose
+                        </button>
+                    </div>
+
+                    <div id="duress-indicator" class="hidden" style="background: rgba(255, 68, 68, 0.2); border: 1px solid #ff4444; border-radius: 8px; padding: 6px 12px; font-size: 11px; font-weight: 800; color: #ff9999; text-align: center;">
+                        ⚠️ DECOY INBOX ACTIVE (DURESS TRIGGERED)
+                    </div>
+                </div>
+
+                <!-- Stream of Email Cards -->
+                <ul id="email-items-container" class="email-cards-stream">
+                    <!-- Populated dynamically with cyber-inbox.svg when empty -->
+                </ul>
+            </section>
+
+            <!-- Right Interactive Cyber Reading Console -->
+            <section id="email-read-pane" class="reading-console">
+                <div class="empty-state">
+                    <img src="/static/images/cyber-reader.svg" alt="Cryptographic HUD" style="width: 250px; height: auto;">
+                    <p>Select an encrypted email to decrypt and inspect</p>
+                    <small style="color: var(--blue-cyan); font-size: 12px;">Hardware-Accelerated Client-Side Decryption via WebCrypto API</small>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- ----------------- MODALS ----------------- -->
+
+    <!-- Authentication Modal (With Eye Show/Hide Toggle on Passwords & ESC Exit) -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <!-- Illustrated Cyber Banner -->
+            <div style="position: relative;">
+                <img src="/static/images/cyber-banner.svg" alt="Cipher Security Shield" class="modal-banner-img">
+                <button id="auth-modal-close" class="modal-close" style="position: absolute; top: 12px; right: 16px; background: rgba(0,0,0,0.6); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;" title="Close (ESC)">&times;</button>
+            </div>
+            
+            <div class="modal-header">
+                <div style="display: flex; gap: 20px;">
+                    <button id="tab-login" style="background: none; border: none; color: var(--pure-white); font-weight: 800; font-size: 15px; cursor: pointer; padding-bottom: 6px; border-bottom: 2px solid var(--blue-electric);">Login</button>
+                    <button id="tab-reg" style="background: none; border: none; color: var(--text-secondary); font-weight: 800; font-size: 15px; cursor: pointer; padding-bottom: 6px;">Register</button>
+                </div>
+                <small style="color: var(--blue-cyan); font-size: 11px;">Press [ESC] to exit</small>
+            </div>
+
+            <div class="modal-body">
+                <!-- Login Form -->
+                <form id="login-form">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Email or Username</label>
+                        <input type="text" id="login-identifier" class="form-input" placeholder="alice@ciphermail.local" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Master Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required>
+                            <button type="button" class="password-toggle-btn" data-target="login-password" title="Show/Hide Password">👁️</button>
+                        </div>
+                        <small style="color: var(--text-muted); font-size: 11px; margin-top: 4px;">
+                            💡 Supports Decoy / Duress Password for anti-coercion protection.
+                        </small>
+                    </div>
+                    <button type="submit" id="login-submit-btn" class="btn-primary" style="width: 100%; padding: 14px; margin-top: 10px;">
+                        Login & Decrypt Vault
+                    </button>
+                </form>
+
+                <!-- Registration Form -->
+                <form id="register-form" class="hidden">
+                    <div class="form-row" style="margin-bottom: 14px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label">Username</label>
+                            <input type="text" id="reg-username" class="form-input" placeholder="alice" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="reg-email" class="form-input" placeholder="alice@isro.gov (or @tcs.com)" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 14px;">
+                        <label class="form-label">Master Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="reg-password" class="form-input" placeholder="Min 6 characters" required>
+                            <button type="button" class="password-toggle-btn" data-target="reg-password" title="Show/Hide Password">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 14px;">
+                        <label class="form-label">Duress / Panic Password (Optional Decoy)</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="reg-duress" class="form-input" placeholder="Alternative password for fake decoy inbox">
+                            <button type="button" class="password-toggle-btn" data-target="reg-duress" title="Show/Hide Password">👁️</button>
+                        </div>
+                        <small style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">
+                            Used if forced to reveal credentials. Only innocent decoy emails will display.
+                        </small>
+                    </div>
+                    <button type="submit" id="reg-submit-btn" class="btn-primary" style="width: 100%; padding: 14px; margin-top: 10px;">
+                        Register & Generate Cryptographic Keypair
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose Modal -->
+    <div id="compose-modal" class="modal-overlay hidden">
+        <div class="modal-card" style="width: 680px;">
+            <div class="modal-header">
+                <span class="modal-title">✉️ Compose Encrypted Mail</span>
+                <button id="compose-close-btn" class="modal-close">&times;</button>
+            </div>
+            <form id="compose-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Recipient Email</label>
+                        <input type="email" id="compose-recipient" list="recipients-list" class="form-input" placeholder="bob@ciphermail.local" required>
+                        <datalist id="recipients-list"></datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Subject (Client-Side Encrypted)</label>
+                        <input type="text" id="compose-subject" class="form-input" placeholder="Confidential Project Specs" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message Body</label>
+                        <textarea id="compose-body" class="form-textarea" placeholder="Type your secure message here..." required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label">Attach File (Encrypted in RAM)</label>
+                            <input type="file" id="compose-file" class="form-input" style="padding: 8px;">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label">Ephemeral Self-Destruct Timer</label>
+                            <select id="compose-timer-select" class="form-select">
+                                <option value="0">No Expiration</option>
+                                <option value="1">Expire in 1 Minute</option>
+                                <option value="5">Expire in 5 Minutes</option>
+                                <option value="60">Expire in 1 Hour</option>
+                                <option value="1440">Expire in 24 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 24px; margin-top: 6px; padding: 12px 16px; background: var(--blue-950); border-radius: 12px; border: 1px solid var(--blue-750);">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; color: var(--blue-electric);">
+                            <input type="checkbox" id="compose-vault-toggle">
+                            <strong>Classified (Route to Shadow Vault)</strong>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; color: #ff8888;">
+                            <input type="checkbox" id="compose-burn-toggle">
+                            <strong>🔥 Burn-After-Reading (Shred on 1st Read)</strong>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" id="send-email-btn" class="btn-primary">
+                        Encrypt & Seal (AES-256)
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shadow Vault Secret Gate Modal -->
+    <div id="vault-unlock-modal" class="modal-overlay hidden">
+        <div class="modal-card" style="width: 480px; border-color: var(--blue-electric);">
+            <img src="/static/images/cyber-vault.svg" alt="Vault Portal" class="modal-banner-img">
+            <div class="modal-header">
+                <span class="modal-title" style="color: var(--pure-white);">🛡️ Shadow Vault Access Gate</span>
+                <button id="vault-modal-close" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+                    You triggered the covert <strong>Shadow Vault Command</strong>. Provide your secondary security passphrase to unlock high-classification E2EE communications.
+                </p>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label class="form-label">Vault Security Passphrase</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="vault-pass-input" class="form-input" placeholder="Enter passphrase (or press Enter)" autofocus>
+                        <button type="button" class="password-toggle-btn" data-target="vault-pass-input" title="Show/Hide Password">👁️</button>
+                    </div>
+                </div>
+                <button type="button" id="vault-unlock-btn" class="btn-primary" style="padding: 13px; margin-top: 10px;">
+                    Unlock Shadow Vault
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Examiner Live Audit & Benchmarking Modal -->
+    <div id="audit-modal" class="modal-overlay hidden">
+        <div class="modal-card" style="width: 860px; max-width: 95vw;">
+            <div class="modal-header">
+                <span class="modal-title">🔍 Examiner Verification: Zero-Knowledge Storage & Seals</span>
+                <button id="audit-close-btn" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" style="max-height: 72vh; overflow-y: auto;">
+                <div>
+                    <h3 style="font-size: 14px; margin-bottom: 8px; color: var(--blue-cyan);">1. Live SQLite Database Raw Inspection</h3>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+                        Proves to examiners that the server administrator has <strong>ZERO knowledge</strong> of subjects, bodies, or attachments. Everything stored is purely random base64 ciphertext:
+                    </p>
+                    <table class="audit-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mode</th>
+                                <th>Routing</th>
+                                <th>Encrypted Subject (Server View)</th>
+                                <th>Encrypted Body (Server View)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 26px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="font-size: 14px; color: var(--blue-electric);">2. Cryptographic Randomness (Shannon Entropy) & Benchmarking</h3>
+                        <button id="run-benchmark-btn" class="btn-secondary" style="font-size: 11px; padding: 6px 12px;">Run Test Now</button>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-secondary);">
+                        Measures computational execution latency and proves ciphertext entropy (theoretical maximum = 8.00 bits/byte):
+                    </p>
+                    <div id="benchmark-results">
+                        <small style="color: var(--text-muted);">Click "Run Test Now" to execute live hardware-accelerated WebCrypto benchmark.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/sound.js"></script>
+    <script src="/static/js/crypto.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

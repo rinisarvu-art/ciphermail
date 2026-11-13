@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" width="220" height="160" fill="none">
+  <defs>
+    <linearGradient id="envelopeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D131C"/>
+      <stop offset="100%" stop-color="#190B10"/>
+    </linearGradient>
+    <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7F0"/>
+      <stop offset="100%" stop-color="#D9CBB6"/>
+    </linearGradient>
+    <linearGradient id="sageGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#889887"/>
+      <stop offset="100%" stop-color="#A7B6A6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Isometric Ground Grid -->
+  <ellipse cx="140" cy="155" rx="90" ry="24" fill="#1A0C13" stroke="#889887" stroke-opacity="0.15" stroke-dasharray="3 3"/>
+  
+  <!-- Floating Envelope Base -->
+  <rect x="70" y="70" width="140" height="90" rx="10" fill="url(#envelopeGrad)" stroke="url(#goldBorder)" stroke-width="1.5"/>
+  
+  <!-- Envelope Flap (Closed with Deep Burgundy seal) -->
+  <path d="M72 73 L140 120 L208 73" stroke="url(#goldBorder)" stroke-width="1.5" fill="none"/>
+  
+  <!-- Cryptographic Wax Seal -->
+  <circle cx="140" cy="118" r="16" fill="#671420" stroke="#FBF7F0" stroke-width="1.5"/>
+  <path d="M135 118 L138 122 L146 114" stroke="#FBF7F0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Security Padlock Shackle Floating Above -->
+  <path d="M125 70 L125 50 C125 40 155 40 155 50 L155 70" stroke="url(#sageGlow)" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Floating Ambient Encrypted Particles in Muted Sage -->
+  <circle cx="55" cy="90" r="3" fill="#889887" opacity="0.6"/>
+  <circle cx="225" cy="85" r="3" fill="#889887" opacity="0.6"/>
+  <circle cx="95" cy="40" r="2" fill="#F7F2EB" opacity="0.5"/>
+  <circle cx="185" cy="40" r="2.5" fill="#D9CBB6" opacity="0.5"/>
+</svg>

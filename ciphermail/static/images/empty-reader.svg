@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="260" height="200" fill="none">
+  <defs>
+    <linearGradient id="docGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241018"/>
+      <stop offset="100%" stop-color="#14080E"/>
+    </linearGradient>
+    <linearGradient id="burgundyAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7B1826"/>
+      <stop offset="100%" stop-color="#4E0C15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Document Silhouette -->
+  <rect x="90" y="40" width="140" height="170" rx="12" fill="url(#docGrad)" stroke="#F7F2EB" stroke-opacity="0.3" stroke-width="1.5"/>
+  <rect x="80" y="50" width="140" height="170" rx="12" fill="url(#docGrad)" stroke="#F7F2EB" stroke-opacity="0.6" stroke-width="1.5"/>
+  
+  <!-- Document Header Lines in Warm Cream -->
+  <rect x="105" y="75" width="70" height="8" rx="4" fill="#F7F2EB" opacity="0.8"/>
+  <rect x="105" y="95" width="90" height="5" rx="2.5" fill="#889887" opacity="0.5"/>
+  
+  <!-- Cryptographic Binary Blocks -->
+  <rect x="105" y="115" width="90" height="4" rx="2" fill="#D9CBB6" opacity="0.3"/>
+  <rect x="105" y="127" width="80" height="4" rx="2" fill="#D9CBB6" opacity="0.3"/>
+  <rect x="105" y="139" width="85" height="4" rx="2" fill="#D9CBB6" opacity="0.3"/>
+  
+  <!-- Security Seal Stamp at bottom-right in Deep Burgundy -->
+  <circle cx="175" cy="180" r="20" fill="url(#burgundyAccent)" stroke="#F7F2EB" stroke-width="1.5"/>
+  <circle cx="175" cy="180" r="15" stroke="#889887" stroke-dasharray="3 3" stroke-width="1"/>
+  <path d="M169 180 L173 184 L182 175" stroke="#F7F2EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Orbiting Verification Ring in Muted Sage -->
+  <ellipse cx="160" cy="120" rx="90" ry="70" stroke="#889887" stroke-opacity="0.25" stroke-dasharray="4 6" stroke-width="1"/>
+  <circle cx="70" cy="120" r="4" fill="#889887"/>
+  <circle cx="250" cy="120" r="4" fill="#F7F2EB"/>
+</svg>

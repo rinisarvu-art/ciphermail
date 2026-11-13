@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="100%" height="160" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A1017"/>
+      <stop offset="50%" stop-color="#1A0C12"/>
+      <stop offset="100%" stop-color="#12080D"/>
+    </linearGradient>
+    <linearGradient id="burgundyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#871D2D"/>
+      <stop offset="100%" stop-color="#480B14"/>
+    </linearGradient>
+    <linearGradient id="creamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7F0"/>
+      <stop offset="100%" stop-color="#D9CBB6"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="400" height="160" rx="14" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Security Pattern -->
+  <circle cx="200" cy="80" r="65" stroke="#889887" stroke-opacity="0.15" stroke-dasharray="4 4" stroke-width="1.5"/>
+  <circle cx="200" cy="80" r="50" stroke="#F7F2EB" stroke-opacity="0.1" stroke-width="1"/>
+  
+  <!-- Main Shield -->
+  <path d="M200 35 L232 50 C232 82 216 108 200 120 C184 108 168 82 168 50 Z" 
+        fill="url(#burgundyGrad)" stroke="url(#creamGrad)" stroke-width="2" filter="url(#glow)"/>
+        
+  <!-- Keyhole in Cream Beige -->
+  <circle cx="200" cy="70" r="8" fill="#F7F2EB"/>
+  <path d="M196 73 L204 73 L207 92 L193 92 Z" fill="#F7F2EB"/>
+
+  <!-- Orbiting Data Nodes in Muted Sage -->
+  <circle cx="140" cy="80" r="4" fill="#889887"/>
+  <line x1="144" y1="80" x2="168" y2="75" stroke="#889887" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="2 3"/>
+
+  <circle cx="260" cy="80" r="4" fill="#889887"/>
+  <line x1="256" y1="80" x2="232" y2="75" stroke="#889887" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="2 3"/>
+
+  <!-- Ambient Stars / Nodes -->
+  <circle cx="70" cy="45" r="2" fill="#D9CBB6" opacity="0.4"/>
+  <circle cx="330" cy="115" r="2" fill="#D9CBB6" opacity="0.4"/>
+  <circle cx="90" cy="120" r="2.5" fill="#889887" opacity="0.5"/>
+  <circle cx="310" cy="40" r="2.5" fill="#889887" opacity="0.5"/>
+</svg>

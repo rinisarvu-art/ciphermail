@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 140" width="100%" height="130" fill="none">
+  <defs>
+    <linearGradient id="vaultBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B0C15"/>
+      <stop offset="50%" stop-color="#20060B"/>
+      <stop offset="100%" stop-color="#140407"/>
+    </linearGradient>
+    <linearGradient id="doorMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58111D"/>
+      <stop offset="100%" stop-color="#2A080E"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="340" height="140" rx="12" fill="url(#vaultBg)"/>
+  
+  <!-- Vault Outer Gear Ring -->
+  <circle cx="170" cy="70" r="52" stroke="#889887" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="6 4"/>
+  <circle cx="170" cy="70" r="44" stroke="#F7F2EB" stroke-opacity="0.2" stroke-width="1.5"/>
+  
+  <!-- Vault Door Wheel in Deep Burgundy & Warm Cream -->
+  <circle cx="170" cy="70" r="34" fill="url(#doorMetal)" stroke="#F7F2EB" stroke-width="2"/>
+  
+  <!-- Vault Wheel Spokes -->
+  <line x1="170" y1="42" x2="170" y2="98" stroke="#F7F2EB" stroke-width="2"/>
+  <line x1="142" y1="70" x2="198" y2="70" stroke="#F7F2EB" stroke-width="2"/>
+  <line x1="150" y1="50" x2="190" y2="90" stroke="#889887" stroke-width="1.5"/>
+  <line x1="150" y1="90" x2="190" y2="50" stroke="#889887" stroke-width="1.5"/>
+  
+  <circle cx="170" cy="70" r="10" fill="#671420" stroke="#F7F2EB" stroke-width="2"/>
+  <circle cx="170" cy="70" r="4" fill="#F7F2EB"/>
+
+  <!-- Left / Right Security Indicator Lights in Muted Sage & Deep Burgundy -->
+  <circle cx="70" cy="70" r="6" fill="#889887" opacity="0.8"/>
+  <line x1="78" y1="70" x2="115" y2="70" stroke="#889887" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="2 3"/>
+
+  <circle cx="270" cy="70" r="6" fill="#889887" opacity="0.8"/>
+  <line x1="225" y1="70" x2="262" y2="70" stroke="#889887" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="2 3"/>
+</svg>
